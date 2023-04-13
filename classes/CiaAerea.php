@@ -1,10 +1,12 @@
 <?php
-  class CiaAerea {
+  include_once('Persiste.php');
+  class CiaAerea extends persist{
       private $nome;
       private $codigo;
       private $razaoSocial;
       private $cnpj;
       private $sigla;
+      static private $filename = 'cia.txt';
       
       public function __construct($nome, $codigo, $razaoSocial, $cnpj, $sigla) {
           $this->nome = $nome;
@@ -13,7 +15,11 @@
           $this->cnpj = $cnpj;
           $this->sigla = $sigla;
       }
- 
+
+      static public function getFilename(){
+        return get_called_class()::$filename;
+      }
+      
       public function getNome() {
           return $this->nome;
       }

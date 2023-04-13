@@ -1,4 +1,5 @@
 <?php
+
 class Aeronave {
     private $fabricante;
     private $modelo;
@@ -21,6 +22,9 @@ class Aeronave {
   /* ToDo: Verificar se o registro da aeronave é válido  
            Cria função valida Aeronave
   */
+    static public function getFilename(){
+      return get_called_class()::$filename;
+    }
   
     public function getProprietaria() {
         return $this->proprietaria;
