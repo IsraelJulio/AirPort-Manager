@@ -1,19 +1,19 @@
 <?php
   include_once('Persiste.php');
   class CiaAerea extends persist{
-      private $nome;
-      private $codigo;
-      private $razaoSocial;
-      private $cnpj;
-      private $sigla;
+      private string $nome;
+      private string $razaoSocial;
+      private string $cnpj;
+      private string $sigla;
+      private float $precoBagagem;
       static private $filename = 'cia.txt';
       
-      public function __construct($nome, $codigo, $razaoSocial, $cnpj, $sigla) {
+      public function __constringuct(string $nome, string $razaoSocial, string $cnpj, string $sigla, float $precoBagagem) {
           $this->nome = $nome;
-          $this->codigo = $codigo;
           $this->razaoSocial = $razaoSocial;
           $this->cnpj = $cnpj;
-          $this->sigla = $sigla;
+          $this->setSigla($sigla);
+          $this->setPrecoBagagem($precoBagagem);
       }
 
       static public function getFilename(){
@@ -22,10 +22,6 @@
       
       public function getNome() {
           return $this->nome;
-      }
-
-      public function getCodigo() {
-          return $this->codigo;
       }
       
       public function getRazaoSocial() {
@@ -39,14 +35,27 @@
       public function getSigla() {
           return $this->sigla;
       }
+    
+      private function setSigla(string $sigla) {
+        $pattern = "/^[A-Z]{2}$/";
+        $sigla = stringtoupper($sigla);
+        if (preg_match($pattern, $sigla) != 1){
+          throw new Exception('Sigla inválida');
+        }
+       $this->$sigla = $sigla;
+      }
+
+      public function getPrecoBagagem() {
+        return $this->precoBagagem;
+      }
+
+      public function setPrecoBagagem(float $precoBagagem) {
+        if($precoBagagem <= 0){
+          throw new Exception("Preço da bagagem deve ser maior que 0.");
+        }
+        $this->precoBagagem = $precoBagagem;
+      }
 
   }
-
-/*
-$viagem = new CiaAerea('AZUL', '010', 'Azul Companhia Aerea', '00.132.456.009-10', 'AZL');
-echo "Companhia Aerea: " . $viagem->getNome() . PHP_EOL; 
-echo "Destino: " . $viagem->getCnpj(); 
-*/
-
 
 ?>

@@ -1,28 +1,20 @@
 <?php
-  
-class Aeroporto {
-  private $origem;
-  private $destino;
+include_once('Persiste.php');
+class Aeroporto extends persist{
   private $sigla;
   private $cidade;
   private $estado;
-
-  public function __construct($sigla, $cidade, $estado, $origem, $destino) {
-    $this->origem = $origem;
-    $this->destino = $destino;
+  static private $filename = 'aeroporto.txt';
+  
+  public function __construct($sigla, $cidade, $estado) {
     $this->sigla = $sigla;
     $this->cidade = $cidade;
     $this->estado = $estado;
   }
+  static public function getFilename(){
+    return get_called_class()::$filename;
+  }
 
-  public function getOrigem() {
-        return $this->origem;
-    }
-
-  public function getDestino() {
-        return $this->destino;
-    }
-  
   public function getSigla() {
     return $this->sigla;
   }
@@ -40,12 +32,4 @@ class Aeroporto {
   }
 
 }
-
-/* teste
-
-$viagem = new Aeroporto("SP", "Sorocaba", "São Paulo", "São Paulo","Belo Horizonte");
-echo "Origem: " . $viagem->getOrigem() . PHP_EOL; 
-echo "Destino: " . $viagem->getDestino(); 
-
-*/
 ?>

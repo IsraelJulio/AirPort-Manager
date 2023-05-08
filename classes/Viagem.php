@@ -1,18 +1,23 @@
 <?php
 
 class Viagem {
-  private $linha;
-  private $aeronave;
-  private $horaPartida;
-  private $horaChegada;
-  protected $dataHora;
+  private string $codigoViagem;
+  private Linha $linha;
+  private string $aeronave;
+  private DateTime $horaPartida;
+  private DateTime $horaChegada;
+  private string $ciaAerea; // Sigla da CiaAerea 
+  private $vagas = array();
+  protected DateTime $dataHora;
 
-  public function __construct($linha, $aeronave, $horaPartida, $horaChegada, DateTime $dataHora) {
+  public function __construct($linha, $aeronave, $horaPartida, $horaChegada, DateTime $dataHora, $codigoViagem, $ciaAerea) {
     $this->dataHora = $dataHora;
     $this->linha = $linha;
     $this->aeronave = $aeronave;
     $this->horaPartida = $horaPartida;
     $this->horaChegada = $horaChegada;
+    $this->setCodigoViagem($codigoViagem, $ciaAerea);
+    $this->ciaAerea = $ciaAerea;
   }
 
   public function getYear() {
@@ -63,7 +68,33 @@ class Viagem {
   public function setHoraChegada($horaChegada) {
     $this->horaChegada = $horaChegada;
   }
+
+  public function getCodigoViagem() {
+    return $this->codigoViagem;
+  }
+
+  private function setCodigoViagem($codigoViagem, $ciaAerea) {
+    if (strlen($codigoViagem) != 6 || !ctype_alpha(substr($codigoViagem, 0, 2)) || !ctype_digit(substr($codigoViagem, 2))) {
+      echo "Formatação incorreta. Exemplo: AA2222"
+      return false;
+    }
+    if (substr($codigoViagem, 0, 2) != $ciaAerea) {
+      echo "Sigla da Companhia Aérea não coincide"
+      return false;
+    }
+    else {
+      $this->codigoViagem = $codigoViagem;
+      return true;
+    }
+  }
+
+  public function getCiaAerea() {
+    return $this->ciaAerea;
+  }
   
+  public function validaCodigoViagem($codigoViagem, $ciaAerea) {
+
+}
 }
 /*
 $dataHora = DateTime::createFromFormat('Y-m-d H:i:s', '2021-10-01 10:30:00');

@@ -3,17 +3,18 @@
     abstract class persist {
         private ?string $filename;
         private ?int $index = null; 
+      
         public function __construct() {        
             if (func_num_args()==1) {
                 $this->filename = func_get_arg(0);	                		
-			}  
+			      }  
             else if (func_num_args()==2) {
                 $this->filename = func_get_arg(0);	
                 $this->index = func_get_arg(1);              
-			}             
+			      }            
 			else {
-				throw( new Exception('Eror ao instanciar objeto da classe Persist - Número de parâmetros incorreto.'));
-            }
+				throw( new Exception('Erro ao instanciar objeto da classe Persist - Número de parâmetros incorreto.'));
+           }
         }
 
         public function __destruct() {
