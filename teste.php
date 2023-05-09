@@ -1,16 +1,22 @@
 <?php
   include_once('global.php');
 
-  $ciaT = new CiaAerea('Teste', 1, 'Testando', 'cnpj', 'TST');
-  $ciaT->save();
+  $ciaAerea = new CiaAerea('Teste', '1b', 'Testando', 'CN', 3);
+  $ciaAerea->save();
+  //var_dump($ciaAerea);
 
-  $aeronaveT = new Aeronave('fabricante', 'modelo', 'capacidadePass', 'capacidadeCarga', 'registro', $ciaT, 'proprietaria', 'codigo');
+  $aeronaveT = new Aeronave('fabricante', 'modelo', 3, 0, 'PT-RAE', $ciaAerea);
   $aeronaveT->save();
+  // var_dump($aeronaveT);
 
-  $agora = date('Y-m-d H:i:s');
+  $nomeDaCia = $aeronaveT->ciaAerea->getNome();
+  echo $nomeDaCia;
+  
 
-  $cliente = new Cliente('Israel', 'Jhonatas', 'meu RG', 123);
-  $cliente->save();
+// $agora = date('Y-m-d H:i:s');
+
+  // $cliente = new Cliente('Israel', 'Jhonatas', 'meu RG', 123);
+  // $cliente->save();
 
 
 

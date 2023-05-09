@@ -8,7 +8,7 @@
       private float $precoBagagem;
       static private $filename = 'cia.txt';
       
-      public function __constringuct(string $nome, string $razaoSocial, string $cnpj, string $sigla, float $precoBagagem) {
+      public function __construct(string $nome, string $razaoSocial, string $cnpj, string $sigla, float $precoBagagem) {
           $this->nome = $nome;
           $this->razaoSocial = $razaoSocial;
           $this->cnpj = $cnpj;
@@ -38,7 +38,7 @@
     
       private function setSigla(string $sigla) {
         $pattern = "/^[A-Z]{2}$/";
-        $sigla = stringtoupper($sigla);
+        // $sigla = stringtoupper($sigla);
         if (preg_match($pattern, $sigla) != 1){
           throw new Exception('Sigla inválida');
         }

@@ -3,19 +3,21 @@ include_once('Persiste.php');
 class Aeronave extends persist{
     private String $fabricante;
     private String $modelo;
-    private Int $capacidadePassageiros;
-    private Float $capacidadeCarga;
+    private string $capacidadePassageiros;
+    private string $capacidadeCarga;
     private String $registro;
-    private CiaAerea $proprietaria;
+    public CiaAerea $ciaAerea;
     static private $filename = 'aeronave.txt';
   
-    public function __construct($fabricante, $modelo, $capacidadePass, $capacidadeCarga, $registro, $proprietaria) {
+    public function __construct($fabricante, $modelo, $capacidadePass, $capacidadeCarga, $registro, $ciaAerea) {      
         $this->fabricante = $fabricante;
         $this->modelo = $modelo;
         $this->capacidadePassageiros = $capacidadePass;
         $this->capacidadeCarga = $capacidadeCarga;
-        $this->setRegistro($registro);
-        $this->proprietaria = $proprietaria;
+        if($this->setRegistro($registro)){
+          $this->$registro = $registro;
+        };
+        $this->ciaAerea = $ciaAerea;
     }
     
     static public function getFilename(){
@@ -23,11 +25,11 @@ class Aeronave extends persist{
     }
   
     public function getProprietaria() {
-      return $this->proprietaria;
+      return $this->ciaAerea;
     }
     
-    public function setProprietaria(CiaAerea $proprietaria) {
-      $this->proprietaria = $proprietaria;
+    public function setProprietaria(CiaAerea $ciaAerea) {
+      $this->ciaAerea = $ciaAerea;
     }
     
     public function getFabricante() {
