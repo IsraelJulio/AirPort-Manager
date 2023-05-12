@@ -1,12 +1,13 @@
 <?php
-
-class Pessoa {
+declare(strict_types=1);
+include_once('Persiste.php');
+class Pessoa extends persist{
     protected string $nome;
     protected string $rg;
     protected string $passaporte;
     protected string $cpf;
     protected string $nacionalidade;
-    protected Date $nascimento;
+    protected string $nascimento;
     protected string $email;
     protected string $logradouro;
     protected string $nLogradouro;
@@ -14,8 +15,10 @@ class Pessoa {
     protected string $cep;
     protected string $cidade;
     protected string $estado;
+    static private $filename = 'pessoa.txt';
+  
 
-    public function __construct(string $nome, string $rg, string $passaporte, string $cpf, string $nacionalidade, Date $nascimento, string $email, bool $vip) {
+    public function __construct($nome, $rg, $passaporte, $cpf, $nacionalidade, $nascimento, $email,$logradouro,$nLogradouro,$bairro,$cep,$cidade,$estado ) {
         $this->nome = $nome;
         $this->rg = $rg;
         $this->passaporte = $passaporte;
@@ -29,9 +32,12 @@ class Pessoa {
         $this->cep = $cep;
         $this->cidade = $cidade;
         $this->estado = $estado;
-        $this->vip = $vip;
     }
 
+    static public function getFilename(){
+    return get_called_class()::$filename;
+  }
+  
     public function getNome() {
         return $this->nome;
     }

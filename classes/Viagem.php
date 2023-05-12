@@ -1,25 +1,31 @@
 <?php
+declare(strict_types=1);
+include_once('Persiste.php');
 
-class Viagem {
+class Viagem extends persist{
   private string $codigoViagem;
   private Linha $linha;
   private string $aeronave;
-  private DateTime $horaPartida;
-  private DateTime $horaChegada;
+  private string $horaPartida;
+  private string $horaChegada;
   private string $ciaAerea; // Sigla da CiaAerea 
   private $vagas = array();
-  protected DateTime $dataHora;
+  protected string $dataHora;
+  static private $filename = 'viagem.txt';
 
-  public function __construct($linha, $aeronave, $horaPartida, $horaChegada, DateTime $dataHora, $codigoViagem, $ciaAerea) {
+  public function __construct($linha, $aeronave, $horaPartida, $horaChegada, $dataHora, $codigoViagem, $ciaAerea) {
     $this->dataHora = $dataHora;
     $this->linha = $linha;
     $this->aeronave = $aeronave;
     $this->horaPartida = $horaPartida;
     $this->horaChegada = $horaChegada;
-    $this->setCodigoViagem($codigoViagem, $ciaAerea);
+    // $this->setCodigoViagem($codigoViagem, $ciaAerea);
     $this->ciaAerea = $ciaAerea;
   }
-
+  static public function getFilename(){
+    return get_called_class()::$filename;
+  }
+ 
   public function getYear() {
     return $this-> dataHora ->format ("Y");
   }
@@ -75,11 +81,11 @@ class Viagem {
 
   private function setCodigoViagem($codigoViagem, $ciaAerea) {
     if (strlen($codigoViagem) != 6 || !ctype_alpha(substr($codigoViagem, 0, 2)) || !ctype_digit(substr($codigoViagem, 2))) {
-      echo "Formatação incorreta. Exemplo: AA2222"
+      echo "Formatação incorreta. Exemplo: AA2222";
       return false;
     }
     if (substr($codigoViagem, 0, 2) != $ciaAerea) {
-      echo "Sigla da Companhia Aérea não coincide"
+      echo "Sigla da Companhia Aérea não coincide";
       return false;
     }
     else {

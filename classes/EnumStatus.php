@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
   class EnumStatus {
     const PA = "Passagem adquirida"
     const PC = "Passagem cancelada"

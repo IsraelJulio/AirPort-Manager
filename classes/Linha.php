@@ -1,64 +1,59 @@
 <?php
+declare(strict_types=1);
 include_once('Persiste.php');
 class Linha extends persist{
 
-    private string $origem
-    private string $destino
-    private DateTime $horarioPartida;
-    private Frequencia $frequencia;
-    private DateTime $duracaoEstimada;
+    private string $origem;
+    private string $destino;
+    private string $horarioPartida;
+    private array $frequencia;
+    private string $duracaoEstimada;
     private string $codLinha;
     private Aeronave $aeronave;
     static private $filename = 'linha.txt';
 
-    public function __construct(str $origem, str $destino, datetime $horarioPartida, Frequencia $frequencia, datetime $duracaoEstimada, str $codLinha, Aeronave $aeronave, CiaAerea $ciaAerea) {
+    public function __construct( $origem,  $destino, $horarioPartida,  $duracaoEstimada,  $codLinha, $aeronave, $ciaAerea) {
           $this->origem = $origem;
           $this->destino = $destino;
           $this->horarioPartida = $horarioPartida;
-          $this->frequencia = $frequencia;
           $this->duracaoEstimada = $duracaoEstimada;
-          $this->codLinha = $codLinha;
+          if(this->setCodLinha($codLinha)){
+                  $this->codLinha = $codLinha;
+          }
           $this->aeronave = $aeronave;
-          $this->setAeronave($aeronave);
+          
       }
   
-    public function getOrigem($origem) {
+    static public function getFilename(){
+    return get_called_class()::$filename;
+  }
+  
+    public function getOrigem() {
         return $this->origem;
     }
 
-    public function getDestino($destino) {
+    public function getDestino() {
         return $this->destino;
     }
   
-    public function getHorarioPartida($horarioPartida) {
+    public function getHorarioPartida() {
         return $this->horarioPartida;
     }
 
-    public function getDuracaoEstimada($duracaoEstimada) {
+    public function getDuracaoEstimada() {
         return $this->duracaoEstimada;
     }
 
-    public function getFrequencia($frequencia) {
-        return $this->frequencia;
-    }
-
-    public function getCodLinha($codLinha){
+    public function getCodLinha(){
       return $this->codLinha;
     }
 
-    public function geraViagens($viagem) {
+    public function getViagens() {
         $this->viagem = $viagem;
     }    
   
-    public function getHorarioPartida($horarioPartida) {
-        return $this->horarioPartida;
-    }
-  
-    public function getFrequencia($frequencia) {
-        return $this->frequencia;
-    }
-    
-    public function getAeronave($aeronave) {
+   
+    public function getAeronave() {
         return $this->aeronave;
     }
 
@@ -68,10 +63,26 @@ class Linha extends persist{
 
     
 
-    public function getCiaAerea($ciaAerea) {
+    public function getCiaAerea() {
         return $this->ciaAerea;
     }
-  
+
+//checa se o código está no formato certo
+    private function setCodLinha($codLinha){
+      if (strlen($codLinha) != 6) {  
+        return false;
+      }
+      $prefixo = substr($codLinha, 0, 2);
+      $sufixo = substr($codLinha, 2, 4);
+      //checa se os dígitos iniciais são letras
+      if (!ctype_alpha($prefixo)) {
+        return false;
+    }     
+      //checa se os dígitos finais são números
+      if (!ctype_digit($sufixo)) {
+        return false;
+    }     
+  return true;
 }
 
 ?>

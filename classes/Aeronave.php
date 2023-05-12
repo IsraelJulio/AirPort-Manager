@@ -1,23 +1,24 @@
 <?php
+declare(strict_types=1);
 include_once('Persiste.php');
 class Aeronave extends persist{
     private String $fabricante;
     private String $modelo;
-    private string $capacidadePassageiros;
-    private string $capacidadeCarga;
+    private int $capacidadePassageiros;
+    private float $capacidadeCarga;
     private String $registro;
-    public CiaAerea $ciaAerea;
+    private CiaAerea $proprietaria;
     static private $filename = 'aeronave.txt';
   
-    public function __construct($fabricante, $modelo, $capacidadePass, $capacidadeCarga, $registro, $ciaAerea) {      
+    public function __construct($fabricante, $modelo, $capacidadePassageiros, $capacidadeCarga, $registro, $proprietaria) {      
         $this->fabricante = $fabricante;
         $this->modelo = $modelo;
-        $this->capacidadePassageiros = $capacidadePass;
+        $this->capacidadePassageiros = $capacidadePassageiros;
         $this->capacidadeCarga = $capacidadeCarga;
         if($this->setRegistro($registro)){
-          $this->$registro = $registro;
-        };
-        $this->ciaAerea = $ciaAerea;
+          $this->registro = $registro;
+        }
+        $this->proprietaria = $proprietaria;
     }
     
     static public function getFilename(){
@@ -25,11 +26,11 @@ class Aeronave extends persist{
     }
   
     public function getProprietaria() {
-      return $this->ciaAerea;
+      return $this->proprietaria;
     }
     
-    public function setProprietaria(CiaAerea $ciaAerea) {
-      $this->ciaAerea = $ciaAerea;
+    public function setProprietaria($proprietaria) {
+      $this->proprietaria = $proprietaria;
     }
     
     public function getFabricante() {
@@ -53,22 +54,24 @@ class Aeronave extends persist{
     }
 
     private function setRegistro($registro) {
-      if (strlen($registro) != 6 || $registro[2] != '-') {
-          return false;
+      if (strlen($registro) != 6 || $registro[2] != '-') {  
+        return false;
       }
       $prefixo = substr($registro, 0, 2);
       if ($prefixo != 'PT' && $prefixo != 'PR' && $prefixo != 'PP' && $prefixo != 'PS') {
           echo 'Aeronave não permitida para voos nacionais.';
           return false;
       }
-      if (!ctype_upper($registro[0]) || !ctype_upper($registro[1])) {
-          return false;
+      if (!ctype_upper($registro[0]) || !ctype_upper($registro[1])) {  
+        return false;
       }
-      if (!ctype_upper($registro[3]) || !ctype_upper($registro[4]) || !ctype_upper($registro[5])) {
-          return false;
+      if (!ctype_upper($registro[3]) || !ctype_upper($registro[4]) || !ctype_upper($registro[5])) {  
+        return false;
       }
       return true;
   }
 
 }
+
+
 ?>

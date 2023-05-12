@@ -1,12 +1,18 @@
 <?php
-  include_once('../global.php');
+  include_once('global.php');
 
   $ciaAerea = new CiaAerea(
-    "CiaTeste",
-    "Companhia",
-    "123456",
-    "AB",
+    "MeuNome",
+    "MinhaRazaoSocial",
+    "MeuCNPJ",
+    "MinhaSigla",
     25.5
   );
 
-  // var_dump($ciaAerea);
+  echo $ciaAerea->getNome(), " ", $ciaAerea->getRazaoSocial(), " ", $ciaAerea->getCnpj(), "\n";
+
+  echo $ciaAerea->getSigla(), " ", $ciaAerea->getPrecoBagagem();
+
+  $ciaAerea->setPrecoBagagem(-10);
+
+  echo $ciaAerea->getPrecoBagagem();

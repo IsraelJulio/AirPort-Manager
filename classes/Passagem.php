@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 include_once('Persiste.php');
 class Passagem extends persist{
   private Passageiro $passageiro;

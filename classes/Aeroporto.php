@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 include_once('Persiste.php');
 class Aeroporto extends persist{
-  private $sigla;
-  private $cidade;
-  private $estado;
+  private string $sigla;
+  private string $cidade;
+  private string $estado;
   static private $filename = 'aeroporto.txt';
   
   public function __construct($sigla, $cidade, $estado) {
