@@ -55,7 +55,6 @@
         if($precoBagagem <= 0){
           throw new Exception("Preço da bagagem deve ser maior que 0.");
         }
-        
         $this->precoBagagem = $precoBagagem;
       }
 

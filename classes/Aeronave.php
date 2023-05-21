@@ -2,11 +2,11 @@
 declare(strict_types=1);
 include_once('Persiste.php');
 class Aeronave extends persist{
-    private String $fabricante;
-    private String $modelo;
+    private string $fabricante;
+    private string $modelo;
     private int $capacidadePassageiros;
     private float $capacidadeCarga;
-    private String $registro;
+    private string $registro;
     private CiaAerea $proprietaria;
     static private $filename = 'aeronave.txt';
   

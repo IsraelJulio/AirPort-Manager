@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 include_once('Persiste.php');
-class Cliente extends persist{
+class Cliente extends Pessoa{
   private string $nome;
   private string $sobrenome;
   private string $rg;

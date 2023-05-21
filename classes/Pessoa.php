@@ -9,12 +9,7 @@ class Pessoa extends persist{
     protected string $nacionalidade;
     protected string $nascimento;
     protected string $email;
-    protected string $logradouro;
-    protected string $nLogradouro;
-    protected string $bairro;
-    protected string $cep;
-    protected string $cidade;
-    protected string $estado;
+    protected Endereco $endereco;
     static private $filename = 'pessoa.txt';
   
 
@@ -26,17 +21,11 @@ class Pessoa extends persist{
         $this->nacionalidade = $nacionalidade;
         $this->nascimento = $nascimento;
         $this->email = $email;
-        $this->logradouro = $logradouro;
-        $this->nLogradouro = $nLogradouro;
-        $this->bairro = $bairro;
-        $this->cep = $cep;
-        $this->cidade = $cidade;
-        $this->estado = $estado;
     }
 
     static public function getFilename(){
-    return get_called_class()::$filename;
-  }
+    		return get_called_class()::$filename;
+  	}
   
     public function getNome() {
         return $this->nome;
